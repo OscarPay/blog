@@ -10,12 +10,30 @@ RSpec.describe 'update a post', type: :system do
   end
 
   scenario 'edit author' do
-  ###TODO: complete this scenario 100% controller coverage
-  ###Ability to change the author from Andrew to Matt
+    ###TODO: complete this scenario 100% controller coverage
+    ###Ability to change the author from Andrew to Matt
+    visit edit_post_path(@post)
+    select "Matt", from: "post[user_id]"
+    click_button 'Update Post'
 
+    expect(page).to have_content("Post was successfully updated.")
+    expect(page).to have_content("By: Matt")
+    expect(page).to have_content("This is my first blog post.") 
+
+    expect(Post.count).to eq(1)
   end
 
-  ###TODO: complete this spec 100% controller coverage
+  scenario 'empty title and body' do
+    visit edit_post_path(@post)
+    fill_in "Title", with: ""
+    fill_in "Body", with: ""
+    click_button 'Update Post'
+
+    expect(page).to have_content("Title can't be blank")
+    expect(page).to have_content("Body can't be blank")
+
+    expect(Post.count).to eq(1)
+  end
 
   
 end
