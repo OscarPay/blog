@@ -35,7 +35,7 @@ RSpec.describe 'create a post', type: :system do
     
     expect(page).to have_content("My Blog Post")
     expect(page).to have_content("By: Andrew")
-    expect(page).to have_content("Hello world!...")
+    expect(page).to have_content("Hello world! ...")
     expect(page).to_not have_content("This is my first blog post.")
 
     # Go back to the blog post
